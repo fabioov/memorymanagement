@@ -226,8 +226,12 @@ export default function Paginacao() {
           </h1>
           <Link 
             href="/"
-            className="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300 transition-colors text-sm"
+            className="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300 transition-colors text-sm flex items-center gap-2"
           >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-arrow-left">
+              <line x1="19" y1="12" x2="5" y2="12"></line>
+              <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
             Voltar
           </Link>
         </div>
@@ -288,12 +292,12 @@ export default function Paginacao() {
                 {frames.length > 0 && (
                   <div className="bg-white p-3 rounded-lg shadow-sm">
                     <div className="flex items-center mb-2">
-                      <span className="text-sm font-medium text-gray-700 mr-2">Passo atual:</span>
-                      <span className="text-lg font-bold">{currentStep}</span>
+                      <span className="text-sm font-medium text-gray-900 mr-2">Passo atual:</span>
+                      <span className="text-lg font-bold text-gray-500">{currentStep}</span>
                     </div>
                     <div className="flex items-center">
-                      <span className="text-sm font-medium text-gray-700 mr-2">Page Faults:</span>
-                      <span className="text-lg font-bold">{pageFaults}</span>
+                      <span className="text-sm font-medium text-gray-900 mr-2">Page Faults:</span>
+                      <span className="text-lg font-bold text-gray-500">{pageFaults}</span>
                     </div>
                   </div>
                 )}
