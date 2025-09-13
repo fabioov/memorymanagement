@@ -51,7 +51,7 @@ export default function PageMemoryVisualization({
           {frames.map((frame) => (
             <div
               key={frame.frameId}
-              className={`${frameSize} rounded-lg flex items-center justify-center ${frame.pageId !== null ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-500'} ${highlightFrame === frame.frameId ? 'ring-4 ring-yellow-400' : ''} transition-all duration-300 shadow-sm`}
+              className={`${frameSize} rounded-lg flex items-center justify-center ${frame.pageId !== null ? 'bg-blue-500 text-white' : 'bg-green-400 text-gray-700'} ${highlightFrame === frame.frameId ? 'ring-4 ring-yellow-400' : ''} transition-all duration-300 shadow-sm`}
             >
               <div className="text-center">
                 <div className="text-xs font-semibold">F{frame.frameId}</div>

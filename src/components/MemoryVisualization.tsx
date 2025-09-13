@@ -100,7 +100,7 @@ export default function MemoryVisualization({
                 key={idx}
                 onClick={() => onRemove(idx)}
                 className={`w-full relative ${
-                  block.used ? "bg-blue-600 hover:bg-blue-700" : "bg-gray-200 hover:bg-gray-300"
+                  block.used ? "bg-blue-600 hover:bg-blue-700" : "bg-green-400 hover:bg-green-500"
                 } transition-colors duration-200`}
                 style={{ height: `${(block.size / totalMemory) * 100}%` }}
               >
@@ -122,7 +122,7 @@ export default function MemoryVisualization({
           <span className="font-medium">Processo alocado na memória (clique para liberar)</span>
         </div>
         <div className="flex items-center">
-          <div className="w-5 h-5 bg-gray-200 mr-3 rounded-sm"></div>
+          <div className="w-5 h-5 bg-green-400 mr-3 rounded-sm"></div>
           <span className="font-medium">Espaço livre na memória</span>
         </div>
       </div>
