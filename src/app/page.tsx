@@ -12,7 +12,7 @@ export default function Home() {
 
         <div className="flex flex-col space-y-6 mt-8">
           <Link 
-            href="/alocacao-continua"
+            href="/alocacao-contigua"
             className="px-6 py-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-center font-medium"
           >
             ALOCAÇÃO CONTÍGUA
