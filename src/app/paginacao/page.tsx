@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import PaginationControls from "@/components/PaginationControls";
 import PageTable from "@/components/PageTable";
 import PageMemoryVisualization from "@/components/PageMemoryVisualization";
@@ -112,7 +112,6 @@ export default function Paginacao() {
   const simulateStep = (requestedPage: number) => {
     setFrames(prevFrames => {
       const updatedFrames = [...prevFrames];
-      let newPageFault = false;
       let frameToHighlight: number | null = null;
 
       const frameIndex = updatedFrames.findIndex(frame => frame.pageId === requestedPage);
@@ -122,7 +121,6 @@ export default function Paginacao() {
         updatedFrames[frameIndex].lastUsed = currentStep;
       } else {
         // Page fault
-        newPageFault = true;
         setPageFaults(prev => prev + 1);
         
         const emptyFrameIndex = updatedFrames.findIndex(frame => frame.pageId === null);
@@ -135,7 +133,7 @@ export default function Paginacao() {
           frameToHighlight = emptyFrameIndex;
         } else {
           // No empty frames, replace a page
-          const frameToReplaceIndex = selectFrameToReplace(updatedFrames, requestedPage);
+          const frameToReplaceIndex = selectFrameToReplace(updatedFrames);
           updatedFrames[frameToReplaceIndex].pageId = requestedPage;
           updatedFrames[frameToReplaceIndex].lastUsed = currentStep;
           updatedFrames[frameToReplaceIndex].loadedAt = currentStep;
@@ -155,8 +153,7 @@ export default function Paginacao() {
   };
 
   const selectFrameToReplace = (
-    currentFrames: Array<{frameId: number; pageId: number | null; lastUsed: number; loadedAt: number}>,
-    requestedPage: number
+    currentFrames: Array<{frameId: number; pageId: number | null; lastUsed: number; loadedAt: number}>
   ) => {
     const requests = requestSequence.split(',').map(r => parseInt(r.trim())).filter(r => !isNaN(r));
 

@@ -15,7 +15,6 @@ interface PageMemoryVisualizationProps {
 
 export default function PageMemoryVisualization({
   frames,
-  totalFrames,
   highlightFrame,
 }: PageMemoryVisualizationProps) {
   // Determina o tamanho dos frames com base na quantidade
