@@ -104,14 +104,14 @@ Padrões de Projeto
 
 Screenshots e Exemplos de Uso
 Página Inicial
+![Página Inicial](./public/initial_page_simulator.png)
 
-[Screenshot da página inicial mostrando os campos de configuração]
 Modo de Alocação Contígua
+![Alocação Contígua](./public/alocacao_contigua.png)
 
-[Screenshot do simulador em modo de alocação contígua]
 Modo de Paginação
+![Alocação Contígua](./public/paginacao.png)
 
-[Screenshot do simulador em modo de paginação]
 Funcionalidades
 Alocação Contígua
 
