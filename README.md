@@ -2,7 +2,7 @@
 
 ## Integrantes
 
-- Fabio Santos
+- Fabio da Silveira dos Santos
 - Ricardo Risson Machado
 
 ## Descrição do Projeto
