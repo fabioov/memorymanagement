@@ -69,20 +69,61 @@ export default function Paginacao() {
       clearInterval(simulationIntervalRef.current);
     }
 
-    simulationIntervalRef.current = setInterval(() => {
-      setCurrentStep(prevStep => {
-        const nextStep = prevStep + 1;
-        if (nextStep > requests.length) {
-          if (simulationIntervalRef.current) {
-            clearInterval(simulationIntervalRef.current);
-            simulationIntervalRef.current = null;
-          }
-          setIsSimulating(false);
-          return prevStep;
+    // Pré-calcula todos os page faults para garantir contagem correta
+    let simulationFrames = [...frames];
+    let faultCount = 0;
+    
+    // Simula todos os passos para calcular o número correto de page faults
+    for (let i = currentStep; i < requests.length; i++) {
+      const requestedPage = requests[i];
+      const frameIndex = simulationFrames.findIndex(frame => frame.pageId === requestedPage);
+      
+      if (frameIndex === -1) {
+        // Page fault
+        faultCount++;
+        
+        const emptyFrameIndex = simulationFrames.findIndex(frame => frame.pageId === null);
+        
+        if (emptyFrameIndex !== -1) {
+          // Empty frame available
+          simulationFrames[emptyFrameIndex].pageId = requestedPage;
+          simulationFrames[emptyFrameIndex].lastUsed = i;
+          simulationFrames[emptyFrameIndex].loadedAt = i;
+        } else {
+          // No empty frames, replace a page
+          const frameToReplaceIndex = selectFrameToReplace(simulationFrames);
+          simulationFrames[frameToReplaceIndex].pageId = requestedPage;
+          simulationFrames[frameToReplaceIndex].lastUsed = i;
+          simulationFrames[frameToReplaceIndex].loadedAt = i;
         }
-        simulateStep(requests[prevStep]);
-        return nextStep;
-      });
+      } else {
+        // Page hit
+        simulationFrames[frameIndex].lastUsed = i;
+      }
+    }
+    
+    // Configura o intervalo para mostrar a animação
+    let step = currentStep;
+    let currentFaults = pageFaults;
+    
+    simulationIntervalRef.current = setInterval(() => {
+      if (step < requests.length) {
+        simulateStep(requests[step]);
+        step++;
+        setCurrentStep(step);
+        
+        // Atualiza a contagem de page faults no último passo
+        if (step === requests.length) {
+          setTimeout(() => {
+            setPageFaults(currentFaults + faultCount);
+          }, 50);
+        }
+      } else {
+        if (simulationIntervalRef.current) {
+          clearInterval(simulationIntervalRef.current);
+          simulationIntervalRef.current = null;
+        }
+      }
     }, 500);
   };
 
